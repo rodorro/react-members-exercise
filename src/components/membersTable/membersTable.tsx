@@ -8,14 +8,20 @@ interface Props {}
 
 export const MembersTableComponent = (props: Props) => {
   const [members, setMembers] = React.useState<MemberEntity[]>([]);
+  const [organization, setOrganization] = React.useState<string>("Lemoncode");
 
   const loadMembers = () => {
     memberAPI.getAllMembers("lemoncode").then(members => setMembers(members));
   };
 
+  const updateOrganization = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOrganization(event.target.value);
+  }
+
   return (
     <div className="row">
       <h2> Members Page</h2>
+      <input value={organization} onChange={updateOrganization}></input>
       <button onClick={loadMembers}>Load</button>
       <table className="table">
         <thead>
