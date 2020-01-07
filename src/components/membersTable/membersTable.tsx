@@ -8,10 +8,10 @@ interface Props {}
 
 export const MembersTableComponent = (props: Props) => {
   const [members, setMembers] = React.useState<MemberEntity[]>([]);
-  const [organization, setOrganization] = React.useState<string>("Lemoncode");
+  const [organization, setOrganization] = React.useState<string>("lemoncode");
 
   const loadMembers = () => {
-    memberAPI.getAllMembers("lemoncode").then(members => setMembers(members));
+    memberAPI.getAllMembers(organization).then(members => setMembers(members));
   };
 
   const updateOrganization = (event: React.ChangeEvent<HTMLInputElement>) => {
