@@ -1,17 +1,21 @@
 import * as React from "react";
 import { MemberEntity } from "../../model/member";
-import { memberAPI } from "../../api/memberAPI";
 import { MemberRow } from "./memberRow";
 import { MemberHead } from "./memberHead";
+import { useMembersByOrganization } from "../../hooks/use-members-collection.hook";
 
 interface Props {}
 
 export const MembersTableComponent = (props: Props) => {
+
   const [members, setMembers] = React.useState<MemberEntity[]>([]);
+  const { getAllMembers } = useMembersByOrganization();
   const [organization, setOrganization] = React.useState<string>("lemoncode");
 
   const loadMembers = () => {
-    memberAPI.getAllMembers(organization).then(members => setMembers(members));
+    getAllMembers(organization)
+      .then(members => setMembers(members))
+      .catch(error => alert(error.message));
   };
 
   const updateOrganization = (event: React.ChangeEvent<HTMLInputElement>) => {
