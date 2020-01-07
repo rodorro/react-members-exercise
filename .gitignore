@@ -1,5 +1,10 @@
-node_modules/
+node_modules
+.DS_Store
 dist/
-.cache/
-transpiled/
+typings/
+*.orig
+.idea/
+*/src/**/*.js
+*/src/**/*.js.map
+*/coverage/
 package-lock.json
