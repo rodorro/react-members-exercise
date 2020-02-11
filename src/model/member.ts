@@ -5,7 +5,7 @@ export interface MemberEntity {
 }
 
 export const createDefaultMemberEntity = () => ({
-  id: -1,
+  id: 0,
   login: '',
   avatar_url: '',
 });

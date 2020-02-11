@@ -3,9 +3,12 @@ import makeStyles from "@material-ui/styles/makeStyles/makeStyles";
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    root: {
+      width: "100%",
+    },
     container: {
       display: "flex",
-      flexDirection: "column"
+      flexDirection: "column",
     },
     title: {
       display: "flex",
@@ -19,9 +22,15 @@ export const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "center",
       marginBottom: "1rem"
     },
+    tableContainer: {
+      // maxHeight: 480,
+    },
     table: {
       minWidth: 650,
       marginBottom: "1rem"
-    }
+    },
+    margin: {
+      margin: "1rem",
+    },
   })
 );

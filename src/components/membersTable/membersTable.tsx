@@ -8,6 +8,9 @@ import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
 import { useStyles } from "./membersTable.style";
+import { Paper } from "@material-ui/core";
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 interface Props {}
 
@@ -33,11 +36,16 @@ export const MembersTableComponent = (props: Props) => {
         <h2> Members Page</h2>
       </div>
       <div className={classes.input}>
-        <input value={organization} onChange={updateOrganization}></input>
-        <button onClick={loadMembers}>Load</button>
+        <TextField id="standard-basic" label="Members" value={organization} 
+          onChange={updateOrganization}/>
+          <Button variant="contained" size="small" color="primary" 
+            className={classes.margin} onClick={loadMembers}>
+            Load
+          </Button>
       </div>
-      <TableContainer>
+      <TableContainer component={Paper} className={classes.tableContainer}>
         <Table
+          stickyHeader 
           className={classes.table}
           size="small"
           aria-label="a dense table"
