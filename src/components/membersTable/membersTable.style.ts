@@ -32,5 +32,8 @@ export const useStyles = makeStyles((theme: Theme) =>
     margin: {
       margin: "1rem",
     },
+    button: {
+      alignSelf: "flex-end"
+    }
   })
 );

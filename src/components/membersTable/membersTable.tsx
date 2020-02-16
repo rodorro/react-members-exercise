@@ -38,10 +38,12 @@ export const MembersTableComponent = (props: Props) => {
       <div className={classes.input}>
         <TextField id="standard-basic" label="Members" value={organization} 
           onChange={updateOrganization}/>
-          <Button variant="contained" size="small" color="primary" 
-            className={classes.margin} onClick={loadMembers}>
-            Load
-          </Button>
+        <div className={classes.button}>
+        <Button variant="contained" size="small" color="primary" 
+          className={classes.margin} onClick={loadMembers}>
+          Load
+        </Button>
+        </div>
       </div>
       <TableContainer component={Paper} className={classes.tableContainer}>
         <Table
