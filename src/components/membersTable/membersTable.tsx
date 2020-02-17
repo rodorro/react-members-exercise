@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { MemberEntity } from "../../model/member";
 import { MemberRow } from "./memberRow";
 import { MemberHead } from "./memberHead";
@@ -19,11 +19,19 @@ export const MembersTableComponent = (props: Props) => {
   const { getAllMembers } = useMembersByOrganization();
   const [organization, setOrganization] = React.useState<string>("lemoncode");
   const classes = useStyles({});
+  const [initialized, setInitialized] = React.useState(false);
+
+  React.useEffect(() => {
+    if(!initialized) {
+      loadMembers();
+    }
+  });
 
   const loadMembers = () => {
     getAllMembers(organization)
       .then(members => setMembers(members))
       .catch(error => alert(error.message));
+    setInitialized(true);
   };
 
   const updateOrganization = (event: React.ChangeEvent<HTMLInputElement>) => {
