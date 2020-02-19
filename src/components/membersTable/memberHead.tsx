@@ -11,6 +11,7 @@ export const MemberHead = () => {
     <TableCell align="center">Avatar</TableCell>
     <TableCell align="center">Id</TableCell>
     <TableCell align="center">Name</TableCell>
+    <TableCell align="center"></TableCell>
   </TableRow>
   );
 };

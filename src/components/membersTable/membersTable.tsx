@@ -34,6 +34,10 @@ export const MembersTableComponent = (props: Props) => {
     setInitialized(true);
   };
 
+  const handleEditMember = (id: number) => {
+    alert(id);
+  }
+
   const updateOrganization = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOrganization(event.target.value);
   };
@@ -65,7 +69,7 @@ export const MembersTableComponent = (props: Props) => {
           </TableHead>
           <TableBody>
             {members.map((member: MemberEntity) => (
-              <MemberRow key={member.id} member={member} />
+              <MemberRow key={member.id} member={member} onMemberEdit={handleEditMember}/>
             ))}
           </TableBody>
         </Table>
