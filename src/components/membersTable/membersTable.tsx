@@ -11,6 +11,7 @@ import { useStyles } from "./membersTable.style";
 import { Paper } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { useHistory } from "react-router-dom";
 
 interface Props {}
 
@@ -20,6 +21,7 @@ export const MembersTableComponent = (props: Props) => {
   const [organization, setOrganization] = React.useState<string>("lemoncode");
   const classes = useStyles({});
   const [initialized, setInitialized] = React.useState(false);
+  const history = useHistory();
 
   React.useEffect(() => {
     if(!initialized) {
@@ -36,6 +38,7 @@ export const MembersTableComponent = (props: Props) => {
 
   const handleEditMember = (id: number) => {
     alert(id);
+    history.push('/member');
   }
 
   const updateOrganization = (event: React.ChangeEvent<HTMLInputElement>) => {
