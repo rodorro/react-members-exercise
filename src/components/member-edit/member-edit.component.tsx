@@ -1,8 +1,6 @@
 import React from "react";
-import { useMember } from "../../hooks/use-members-collection.hook";
-import { createDefaultMemberEntity, MemberEntity } from "../../model/member";
-import { useParams } from "react-router-dom";
-import { Card, CardHeader, Avatar, CardContent, CardMedia, Typography, CardActions, IconButton } from "@material-ui/core";
+import { MemberEntity } from "../../model/member";
+import { Card, CardHeader, Avatar, CardContent, CardMedia, IconButton } from "@material-ui/core";
 import { useStyles } from "./member-edit.component.style";
 import CloseIcon from '@material-ui/icons/Close';
 
