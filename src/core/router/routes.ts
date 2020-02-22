@@ -1,15 +1,20 @@
 import { generatePath } from 'react-router';
 
-interface SwitchRoutes {
+interface Routes {
   root: string;
-  membersTable: string;
-  member: string;
+  membersCollection: string;
+  memberEdit: string;
 }
 
-export const switchRoutes: SwitchRoutes = {
+export const routes: Routes = {
   root: '/',
-  membersTable: '/membersTable',
-  member: '/member/:id',
+  membersCollection: '/members',
+  memberEdit: '/members/:id',
+};
+
+export const linkRoutes = {
+  ...routes,
+  memberEdit: id => generatePath(routes.memberEdit, { id }),
 };
 
 // type NavigationFunction = (id: string) => string;

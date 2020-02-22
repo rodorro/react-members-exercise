@@ -1,6 +1,6 @@
 import * as React from "react";
-import { MembersTableComponent } from "./components";
+import { RouterComponent } from "./core/router";
 
-export const App: React.FunctionComponent = () => {
-  return <MembersTableComponent />;
+export const App = () => {
+  return <RouterComponent />;
 };

@@ -2,7 +2,6 @@ import React from "react";
 import { MemberEntity } from "../../model/member";
 import { MemberRow } from "./memberRow";
 import { MemberHead } from "./memberHead";
-import { useMembersByOrganization } from "../../hooks/use-members-collection.hook";
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -13,36 +12,22 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useHistory } from "react-router-dom";
 
-interface Props {}
+interface Props {
+  organization: string,
+  members: MemberEntity[],
+  onLoadMembers: (organization: string) => void;
+  onMemberEdit: (id: number) => void;
+}
 
 export const MembersTableComponent = (props: Props) => {
-  const [members, setMembers] = React.useState<MemberEntity[]>([]);
-  const { getAllMembers } = useMembersByOrganization();
-  const [organization, setOrganization] = React.useState<string>("lemoncode");
+
+  const { organization, members, onLoadMembers, onMemberEdit } = props;
+  const [selectedOrganization, setSelectedOrganization] = React.useState<string>(organization);
   const classes = useStyles({});
-  const [initialized, setInitialized] = React.useState(false);
   const history = useHistory();
 
-  React.useEffect(() => {
-    if(!initialized) {
-      loadMembers();
-    }
-  });
-
-  const loadMembers = () => {
-    getAllMembers(organization)
-      .then(members => setMembers(members))
-      .catch(error => alert(error.message));
-    setInitialized(true);
-  };
-
-  const handleEditMember = (id: number) => {
-    alert(id);
-    history.push('/member');
-  }
-
   const updateOrganization = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setOrganization(event.target.value);
+    setSelectedOrganization(event.target.value);
   };
 
   return (
@@ -51,11 +36,11 @@ export const MembersTableComponent = (props: Props) => {
         <h2> Members Page</h2>
       </div>
       <div className={classes.input}>
-        <TextField id="standard-basic" label="Members" value={organization} 
+        <TextField id="standard-basic" label="Members" value={selectedOrganization} 
           onChange={updateOrganization}/>
         <div className={classes.button}>
         <Button variant="contained" size="small" color="primary" 
-          className={classes.margin} onClick={loadMembers}>
+          className={classes.margin} onClick={()=>onLoadMembers(selectedOrganization)}>
           Load
         </Button>
         </div>
@@ -72,7 +57,7 @@ export const MembersTableComponent = (props: Props) => {
           </TableHead>
           <TableBody>
             {members.map((member: MemberEntity) => (
-              <MemberRow key={member.id} member={member} onMemberEdit={handleEditMember}/>
+              <MemberRow key={member.id} member={member} onMemberEdit={onMemberEdit}/>
             ))}
           </TableBody>
         </Table>
