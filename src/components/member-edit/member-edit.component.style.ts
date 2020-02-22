@@ -3,10 +3,6 @@ import makeStyles from "@material-ui/styles/makeStyles/makeStyles";
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    container: {
-      // width: '500px',
-      marginTop: '1em',
-    },
     content: {
       display: 'flex',
       flexDirection: 'column',

@@ -17,7 +17,7 @@ export const MemberEditComponent = (props: Props) => {
     return (
         <>
         {member.avatar_url? (
-        <Card className={classes.container}>
+        <Card>
             <CardHeader
                 avatar={<Avatar aria-label="member"></Avatar>}
                 action={
