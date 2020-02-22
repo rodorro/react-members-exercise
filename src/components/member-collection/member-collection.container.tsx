@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMembersCollection } from '../../hooks/use-members-collection.hook';
 import { useHistory } from 'react-router-dom';
-import { MembersTableComponent } from './membersTable';
+import { MemberCollectionComponent } from './member-collection.component';
 import { routes, linkRoutes } from '../../core/router';
 import { SessionContext } from '../../core/session.context';
 
@@ -30,7 +30,7 @@ export const MemberCollectionContainer = () => {
   }    
 
   return (
-    <MembersTableComponent organization={organization} members={membersCollection} 
+    <MemberCollectionComponent organization={organization} members={membersCollection} 
       onLoadMembers={handleLoadMembers} onMemberEdit={handleMemberEdit}/>
   );
 };

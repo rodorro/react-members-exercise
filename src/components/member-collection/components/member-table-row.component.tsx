@@ -1,16 +1,16 @@
 import * as React from "react";
-import { MemberEntity } from "../../model/member";
+import { MemberEntity } from "../../../model/member";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import { Button } from "@material-ui/core";
-import { useStyles } from "./membersTable.style";
+import { useStyles } from "../member-collection.component.style";
 
 interface Props {
   member: MemberEntity
   onMemberEdit: (id: number) => void;
 }
 
-export const MemberRow = (props: Props) => {
+export const MemberTableRowComponent = (props: Props) => {
 
   const classes = useStyles({});
   const { member, onMemberEdit } = props;

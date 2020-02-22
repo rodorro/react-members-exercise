@@ -1,12 +1,12 @@
 import React from "react";
 import { MemberEntity } from "../../model/member";
-import { MemberRow } from "./memberRow";
-import { MemberHead } from "./memberHead";
+import { MemberTableRowComponent } from "./components/member-table-row.component";
+import { MemberTableHeadComponent } from "./components/member-table-head.component";
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
-import { useStyles } from "./membersTable.style";
+import { useStyles } from "./member-collection.component.style";
 import { Paper } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -19,7 +19,7 @@ interface Props {
   onMemberEdit: (id: number) => void;
 }
 
-export const MembersTableComponent = (props: Props) => {
+export const MemberCollectionComponent = (props: Props) => {
 
   const { organization, members, onLoadMembers, onMemberEdit } = props;
   const [selectedOrganization, setSelectedOrganization] = React.useState<string>(organization);
@@ -53,11 +53,11 @@ export const MembersTableComponent = (props: Props) => {
           aria-label="a dense table"
         >
           <TableHead>
-            <MemberHead />
+            <MemberTableHeadComponent />
           </TableHead>
           <TableBody>
             {members.map((member: MemberEntity) => (
-              <MemberRow key={member.id} member={member} onMemberEdit={onMemberEdit}/>
+              <MemberTableRowComponent key={member.id} member={member} onMemberEdit={onMemberEdit}/>
             ))}
           </TableBody>
         </Table>

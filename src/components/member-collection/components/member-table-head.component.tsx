@@ -2,9 +2,9 @@ import * as React from "react";
 
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import { useStyles } from "./membersTable.style";
+import { useStyles } from "../member-collection.component.style";
 
-export const MemberHead = () => {
+export const MemberTableHeadComponent = () => {
   const classes = useStyles({});
   return (
   <TableRow>
