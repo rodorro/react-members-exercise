@@ -1,30 +1,50 @@
 import React from "react";
 import { MemberEntity, createDefaultMemberEntity } from "../model/member";
+import { MEMBERS_PER_PAGE } from "../model/consts";
 
 export const useMembersCollection = () => {
 
   const [membersCollection, setMembersCollection] = React.useState<MemberEntity[]>([]);
+  const [hashMoreElements, setHashMoreElements] = React.useState<boolean>(true);
 
-  // Just return a copy of the mock data
-  const getMembersCollection = (organizationName: string) => {
-    const gitHubMembersUrl: string = `https://api.github.com/orgs/${organizationName}/members`;
+  const getMembersCollection = (organizationName: string, 
+      page: number, refresh: boolean) => {
+
+    const gitHubMembersUrl: string = 
+      `https://api.github.com/orgs/${organizationName}/members?page=${page}`;
 
     fetch(gitHubMembersUrl)
       .then(response => checkStatus(response))
       .then(response => parseJSON(response))
-      .then(data => resolveMembers(data))
+      .then(data => resolveMembers(data, refresh))
   };
 
-  const resolveMembers = (data: any) => {
+  const resolveMembers = (data: any, refresh: boolean) => {
+
     const members = data.map(gitHubMember => {
        return resolveMember(gitHubMember);
     });
-    setMembersCollection(members);
+
+    // if(members.length < MEMBERS_PER_PAGE) {
+    //   setHashMoreElements(false);
+    // } else {
+    //   setHashMoreElements(true);
+    // }
+    refresh 
+      ? 
+      setMembersCollection(members) 
+      :
+      setMembersCollection([
+        ...membersCollection,
+        ...members
+      ]);
   };
 
   return {
     membersCollection,
-    getMembersCollection
+    getMembersCollection,
+    hashMoreElements,
+    setHashMoreElements
   };
 };
 

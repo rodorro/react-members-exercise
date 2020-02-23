@@ -25,7 +25,7 @@ export const MemberCollectionComponent = (props: Props) => {
   const [selectedOrganization, setSelectedOrganization] = React.useState<string>(organization);
   const classes = useStyles({});
   const history = useHistory();
-
+  
   const updateOrganization = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOrganization(event.target.value);
   };
