@@ -3,48 +3,43 @@ import { MemberEntity, createDefaultMemberEntity } from "../model/member";
 import { MEMBERS_PER_PAGE } from "../model/consts";
 
 export const useMembersCollection = () => {
-
-  const [membersCollection, setMembersCollection] = React.useState<MemberEntity[]>([]);
+  const [membersCollection, setMembersCollection] = React.useState<
+    MemberEntity[]
+  >([]);
   const [hashMoreElements, setHashMoreElements] = React.useState<boolean>(true);
 
-  const getMembersCollection = (organizationName: string, 
-      page: number, refresh: boolean) => {
-
-    const gitHubMembersUrl: string = 
-      `https://api.github.com/orgs/${organizationName}/members?page=${page}`;
+  const getMembersCollection = (
+    organizationName: string,
+    page: number,
+    refresh: boolean
+  ) => {
+    const gitHubMembersUrl: string = `https://api.github.com/orgs/${organizationName}/members?page=${page}`;
 
     fetch(gitHubMembersUrl)
       .then(response => checkStatus(response))
       .then(response => parseJSON(response))
-      .then(data => resolveMembers(data, refresh))
+      .then(data => resolveMembers(data, refresh));
   };
 
   const resolveMembers = (data: any, refresh: boolean) => {
-
     const members = data.map(gitHubMember => {
-       return resolveMember(gitHubMember);
+      return resolveMember(gitHubMember);
     });
 
-    // if(members.length < MEMBERS_PER_PAGE) {
-    //   setHashMoreElements(false);
-    // } else {
-    //   setHashMoreElements(true);
-    // }
-    refresh 
-      ? 
-      setMembersCollection(members) 
-      :
-      setMembersCollection([
-        ...membersCollection,
-        ...members
-      ]);
+    if (members.length < MEMBERS_PER_PAGE) {
+      setHashMoreElements(false);
+    } else {
+      setHashMoreElements(true);
+    }
+    refresh
+      ? setMembersCollection(members)
+      : setMembersCollection([...membersCollection, ...members]);
   };
 
   return {
     membersCollection,
     getMembersCollection,
-    hashMoreElements,
-    setHashMoreElements
+    hashMoreElements
   };
 };
 
@@ -61,7 +56,7 @@ export const useMember = () => {
   return {
     getMember
   };
-}
+};
 
 const checkStatus = (response: Response): Promise<Response> => {
   if (response.status >= 200 && response.status < 300) {
