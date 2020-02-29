@@ -11,7 +11,9 @@ export const MemberCollectionContainer = () => {
   const {
     membersCollection,
     getMembersCollection,
-    hashMoreElements
+    hashMoreElements,
+    showOrganizationError,
+    setShowOrganizationError
   } = useMembersCollection();
   const [organization, setOrganization] = React.useState<string>(
     sessionContext.organization
@@ -58,6 +60,10 @@ export const MemberCollectionContainer = () => {
     history.push(route);
   };
 
+  const handleCloseNotifitionError = () => {
+    setShowOrganizationError(false);
+  }
+
   return (
     <>
       <MemberCollectionComponent
@@ -65,6 +71,8 @@ export const MemberCollectionContainer = () => {
         members={membersCollection}
         onLoadMembers={handleLoadMembers}
         onMemberEdit={handleMemberEdit}
+        showOrganizationError={showOrganizationError}
+        onCloseNotificationError={handleCloseNotifitionError}
       />
       {/* {isFetching && hashMoreElements && "Fetching more list items..."} */}
     </>

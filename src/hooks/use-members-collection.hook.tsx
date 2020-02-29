@@ -8,6 +8,7 @@ export const useMembersCollection = () => {
     MemberEntity[]
   >([]);
   const [hashMoreElements, setHashMoreElements] = React.useState<boolean>(true);
+  const [showOrganizationError, setShowOrganizationError] = React.useState(false);
 
   const getMembersCollection = (
     organizationName: string,
@@ -21,6 +22,7 @@ export const useMembersCollection = () => {
         .then(response => checkStatus(response))
         .then(response => parseJSON(response))
         .then(data => resolveMembers(data, refresh))
+        .catch(error => setShowOrganizationError(true))
     );
   };
 
@@ -42,7 +44,9 @@ export const useMembersCollection = () => {
   return {
     membersCollection,
     getMembersCollection,
-    hashMoreElements
+    hashMoreElements,
+    showOrganizationError,
+    setShowOrganizationError
   };
 };
 

@@ -11,17 +11,20 @@ import { Paper } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useHistory } from "react-router-dom";
+import { NotificationComponent } from "../notification";
 
 interface Props {
   organization: string,
   members: MemberEntity[],
   onLoadMembers: (organization: string) => void;
   onMemberEdit: (id: number) => void;
+  showOrganizationError: boolean;
+  onCloseNotificationError: () => void;
 }
 
 export const MemberCollectionComponent = (props: Props) => {
 
-  const { organization, members, onLoadMembers, onMemberEdit } = props;
+  const { organization, members, onLoadMembers, onMemberEdit, showOrganizationError, onCloseNotificationError } = props;
   const [selectedOrganization, setSelectedOrganization] = React.useState<string>(organization);
   const classes = useStyles({});
   const history = useHistory();
@@ -62,6 +65,11 @@ export const MemberCollectionComponent = (props: Props) => {
           </TableBody>
         </Table>
       </TableContainer>
+      <NotificationComponent 
+        message={`No existe la organización ${organization} en github`}
+        show={showOrganizationError}
+        onClose={onCloseNotificationError}
+      />
     </div>
   );
 };
