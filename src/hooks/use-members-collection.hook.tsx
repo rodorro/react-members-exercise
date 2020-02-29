@@ -1,6 +1,7 @@
 import React from "react";
 import { MemberEntity, createDefaultMemberEntity } from "../model/member";
 import { MEMBERS_PER_PAGE } from "../model/consts";
+import { trackPromise} from 'react-promise-tracker';
 
 export const useMembersCollection = () => {
   const [membersCollection, setMembersCollection] = React.useState<
@@ -15,10 +16,12 @@ export const useMembersCollection = () => {
   ) => {
     const gitHubMembersUrl: string = `https://api.github.com/orgs/${organizationName}/members?page=${page}`;
 
-    fetch(gitHubMembersUrl)
-      .then(response => checkStatus(response))
-      .then(response => parseJSON(response))
-      .then(data => resolveMembers(data, refresh));
+    trackPromise(
+      fetch(gitHubMembersUrl)
+        .then(response => checkStatus(response))
+        .then(response => parseJSON(response))
+        .then(data => resolveMembers(data, refresh))
+    );
   };
 
   const resolveMembers = (data: any, refresh: boolean) => {
@@ -47,10 +50,12 @@ export const useMember = () => {
   const getMember = (id: string): Promise<MemberEntity> => {
     const gitHubMemberUrl: string = `https://api.github.com/user/${id}`;
 
-    return fetch(gitHubMemberUrl)
-      .then(response => checkStatus(response))
-      .then(response => parseJSON(response))
-      .then(data => resolveMember(data));
+    return trackPromise(
+      fetch(gitHubMemberUrl)
+        .then(response => checkStatus(response))
+        .then(response => parseJSON(response))
+        .then(data => resolveMember(data))
+      );
   };
 
   return {

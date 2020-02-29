@@ -66,7 +66,7 @@ export const MemberCollectionContainer = () => {
         onLoadMembers={handleLoadMembers}
         onMemberEdit={handleMemberEdit}
       />
-      {isFetching && hashMoreElements && "Fetching more list items..."}
+      {/* {isFetching && hashMoreElements && "Fetching more list items..."} */}
     </>
   );
 };
