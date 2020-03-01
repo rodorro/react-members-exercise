@@ -7,9 +7,11 @@ export const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
+      width: '65%'
     },
     media: {
-      height: 0,
+      // height: 0,
+      width: '50%',
       paddingTop: '56.25%',
     },
   })
