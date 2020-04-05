@@ -1,6 +1,7 @@
-# Firs React exercise
+# React members exercise
 
-In this exercise we are going to get started with React.
+React app to use github api and show organization members list. The list hava infinite scroll to charge elements while scrolling.
+We will can edit each member to show his information.
 
 # Steps to build it
 
